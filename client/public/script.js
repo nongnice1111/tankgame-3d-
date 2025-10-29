@@ -137,10 +137,16 @@ downloadBtn.addEventListener('click', function(e) {
         downloadBtn.style.animation = '';
     }, 500);
     
-    // Simulate download (replace with actual download link)
+    // Trigger download via API
     setTimeout(() => {
+        const link = document.createElement('a');
+        link.href = '/api/download/game';
+        link.download = 'TankGame_3D.rar';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
         showNotification('ดาวน์โหลดเสร็จสิ้น! สนุกกับเกมนะ! 🚀');
-    }, 2000);
+    }, 500);
 });
 
 // ==================== Notification System ====================

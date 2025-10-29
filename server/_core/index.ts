@@ -35,6 +35,19 @@ async function startServer() {
   app.use(express.urlencoded({ limit: "50mb", extended: true }));
   // OAuth callback under /api/oauth/callback
   registerOAuthRoutes(app);
+  
+  // Download endpoint for game file
+  app.get('/api/download/game', (req, res) => {
+    const path = require('path');
+    const filePath = path.join(process.cwd(), 'client', 'public', 'Build.rar');
+    res.download(filePath, 'TankGame_3D.rar', (err) => {
+      if (err) {
+        console.error('Download error:', err);
+        res.status(500).send('Download failed');
+      }
+    });
+  });
+  
   // tRPC API
   app.use(
     "/api/trpc",
