@@ -1,0 +1,26 @@
+{
+  "version": 2,
+  "buildCommand": "pnpm run build",
+  "outputDirectory": "dist",
+  "devCommand": "NODE_ENV=development pnpm run dev",
+  "env": {
+    "NODE_ENV": "production"
+  },
+  "functions": {
+    "server/_core/index.ts": {
+      "runtime": "nodejs20.x",
+      "memory": 1024,
+      "maxDuration": 60
+    }
+  },
+  "routes": [
+    {
+      "src": "^/api/.*",
+      "dest": "dist/index.js"
+    },
+    {
+      "src": "^/.*",
+      "dest": "dist/public/index.html"
+    }
+  ]
+}
