@@ -1,0 +1,634 @@
+/* ==================== Reset & Base Styles ==================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #0a0a0a;
+    color: #e0e0e0;
+    line-height: 1.6;
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
+}
+
+/* ==================== Particle Canvas ==================== */
+#particleCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* ==================== Background ==================== */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('tank-background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    z-index: -2;
+}
+
+.background-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        rgba(10, 10, 10, 0.85),
+        rgba(20, 40, 30, 0.75),
+        rgba(10, 10, 10, 0.9)
+    );
+    z-index: -1;
+}
+
+/* ==================== Loading Screen ==================== */
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a2a1a 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.loading-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loading-content {
+    text-align: center;
+}
+
+.tank-loader {
+    font-size: 5rem;
+    animation: tankMove 2s ease-in-out infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes tankMove {
+    0%, 100% { transform: translateX(-20px); }
+    50% { transform: translateX(20px); }
+}
+
+.loading-text {
+    color: #4CAF50;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+.loading-bar {
+    width: 300px;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.loading-progress {
+    height: 100%;
+    background: linear-gradient(90deg, #4CAF50, #45a049);
+    border-radius: 10px;
+    width: 0%;
+    animation: loadingProgress 2s ease-in-out forwards;
+}
+
+@keyframes loadingProgress {
+    0% { width: 0%; }
+    100% { width: 100%; }
+}
+
+/* ==================== Music Control ==================== */
+.music-control {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: rgba(76, 175, 80, 0.2);
+    border: 2px solid #4CAF50;
+    color: #4CAF50;
+    font-size: 1.8rem;
+    cursor: pointer;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+}
+
+.music-control:hover {
+    background: rgba(76, 175, 80, 0.4);
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
+}
+
+.music-control.playing {
+    animation: musicPulse 1s ease-in-out infinite;
+}
+
+@keyframes musicPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+/* ==================== Container ==================== */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+    opacity: 0;
+    animation: fadeIn 1s ease-out 2s forwards;
+}
+
+/* ==================== Header ==================== */
+.header {
+    text-align: center;
+    padding: 40px 20px 20px;
+}
+
+.logo-section {
+    display: inline-block;
+}
+
+.game-title {
+    font-size: 4rem;
+    font-weight: 900;
+    color: #4CAF50;
+    text-shadow: 
+        0 0 10px rgba(76, 175, 80, 0.5),
+        0 0 20px rgba(76, 175, 80, 0.3),
+        3px 3px 0px rgba(0, 0, 0, 0.8);
+    letter-spacing: 8px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    animation: titleGlow 2s ease-in-out infinite;
+}
+
+@keyframes titleGlow {
+    0%, 100% { 
+        text-shadow: 
+            0 0 10px rgba(76, 175, 80, 0.5),
+            0 0 20px rgba(76, 175, 80, 0.3),
+            3px 3px 0px rgba(0, 0, 0, 0.8);
+    }
+    50% { 
+        text-shadow: 
+            0 0 20px rgba(76, 175, 80, 0.8),
+            0 0 40px rgba(76, 175, 80, 0.5),
+            3px 3px 0px rgba(0, 0, 0, 0.8);
+    }
+}
+
+.tagline {
+    font-size: 1.2rem;
+    color: #b0b0b0;
+    font-weight: 300;
+    letter-spacing: 2px;
+}
+
+/* ==================== Hero Section ==================== */
+.hero {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.hero-content {
+    background: rgba(20, 20, 20, 0.7);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(76, 175, 80, 0.3);
+    border-radius: 20px;
+    padding: 50px 40px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+}
+
+.hero-content:hover {
+    border-color: rgba(76, 175, 80, 0.6);
+    box-shadow: 0 15px 50px rgba(76, 175, 80, 0.2);
+}
+
+.hero-heading {
+    font-size: 2.5rem;
+    color: #ffffff;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.hero-description {
+    font-size: 1.2rem;
+    color: #c0c0c0;
+    margin-bottom: 40px;
+    line-height: 1.8;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ==================== Download Button ==================== */
+.download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    color: #ffffff;
+    font-size: 1.5rem;
+    font-weight: 700;
+    padding: 20px 50px;
+    border-radius: 50px;
+    text-decoration: none;
+    box-shadow: 
+        0 8px 20px rgba(76, 175, 80, 0.4),
+        0 0 30px rgba(76, 175, 80, 0.2);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.download-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.download-btn:hover::before {
+    width: 400px;
+    height: 400px;
+}
+
+.download-btn:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 
+        0 12px 30px rgba(76, 175, 80, 0.6),
+        0 0 50px rgba(76, 175, 80, 0.4);
+}
+
+.download-btn:active {
+    transform: translateY(-2px) scale(1.02);
+}
+
+.btn-icon {
+    font-size: 2rem;
+    position: relative;
+    z-index: 1;
+    animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.btn-text {
+    position: relative;
+    z-index: 1;
+}
+
+.download-info {
+    margin-top: 20px;
+    font-size: 0.95rem;
+    color: #888;
+}
+
+/* ==================== Download Counter ==================== */
+.download-counter {
+    margin-top: 30px;
+    padding: 15px 30px;
+    background: rgba(76, 175, 80, 0.1);
+    border: 1px solid rgba(76, 175, 80, 0.3);
+    border-radius: 30px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.1rem;
+}
+
+.counter-icon {
+    font-size: 1.5rem;
+}
+
+/* ==================== Features Section ==================== */
+.features {
+    padding: 60px 20px;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #4CAF50;
+    margin-bottom: 40px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.feature-card {
+    background: rgba(30, 30, 30, 0.8);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(76, 175, 80, 0.2);
+    border-radius: 15px;
+    padding: 40px 30px;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.feature-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    border-color: rgba(76, 175, 80, 0.6);
+    box-shadow: 0 10px 30px rgba(76, 175, 80, 0.3);
+}
+
+.feature-icon {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+.feature-card h4 {
+    font-size: 1.5rem;
+    color: #ffffff;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.feature-card p {
+    color: #b0b0b0;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* ==================== Stats Section ==================== */
+.stats {
+    padding: 60px 20px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.stat-card {
+    background: rgba(30, 30, 30, 0.8);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(76, 175, 80, 0.2);
+    border-radius: 15px;
+    padding: 40px 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(76, 175, 80, 0.5);
+    box-shadow: 0 10px 25px rgba(76, 175, 80, 0.2);
+}
+
+.stat-number {
+    font-size: 3rem;
+    font-weight: 900;
+    color: #4CAF50;
+    margin-bottom: 10px;
+}
+
+.stat-label {
+    font-size: 1.1rem;
+    color: #b0b0b0;
+}
+
+/* ==================== Team Section ==================== */
+.team {
+    padding: 60px 20px;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.team-member {
+    background: rgba(30, 30, 30, 0.8);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(76, 175, 80, 0.2);
+    border-radius: 15px;
+    padding: 30px 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.team-member:hover {
+    transform: translateY(-8px) rotate(2deg);
+    border-color: rgba(76, 175, 80, 0.5);
+    box-shadow: 0 10px 25px rgba(76, 175, 80, 0.2);
+}
+
+.member-avatar {
+    font-size: 4rem;
+    margin-bottom: 15px;
+    animation: rotate 5s linear infinite;
+}
+
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.team-member:hover .member-avatar {
+    animation: none;
+    transform: scale(1.2);
+}
+
+.member-name {
+    font-size: 1.3rem;
+    color: #ffffff;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.member-id {
+    color: #4CAF50;
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.member-role {
+    color: #888;
+    font-size: 0.95rem;
+    font-style: italic;
+}
+
+/* ==================== Footer ==================== */
+.footer {
+    text-align: center;
+    padding: 40px 20px;
+    margin-top: 60px;
+    border-top: 2px solid rgba(76, 175, 80, 0.2);
+}
+
+.footer p {
+    color: #888;
+    font-size: 0.95rem;
+    margin-bottom: 5px;
+}
+
+.footer-note {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+/* ==================== Notification Toast ==================== */
+.notification {
+    position: fixed;
+    bottom: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(76, 175, 80, 0.95);
+    color: white;
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    z-index: 10000;
+    transition: bottom 0.5s ease;
+    box-shadow: 0 5px 20px rgba(76, 175, 80, 0.5);
+}
+
+.notification.show {
+    bottom: 30px;
+}
+
+/* ==================== Animations ==================== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* ==================== Responsive Design ==================== */
+@media (max-width: 768px) {
+    .game-title {
+        font-size: 2.5rem;
+        letter-spacing: 4px;
+    }
+    
+    .tagline {
+        font-size: 1rem;
+    }
+    
+    .hero-heading {
+        font-size: 1.8rem;
+    }
+    
+    .hero-description {
+        font-size: 1rem;
+    }
+    
+    .download-btn {
+        font-size: 1.2rem;
+        padding: 15px 35px;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .features-grid,
+    .team-grid,
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .music-control {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .game-title {
+        font-size: 2rem;
+        letter-spacing: 2px;
+    }
+    
+    .hero-content {
+        padding: 30px 20px;
+    }
+    
+    .download-btn {
+        font-size: 1rem;
+        padding: 12px 25px;
+        gap: 10px;
+    }
+    
+    .btn-icon {
+        font-size: 1.5rem;
+    }
+
+    .stat-number {
+        font-size: 2rem;
+    }
+}

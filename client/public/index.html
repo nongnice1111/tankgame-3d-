@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TankGame 3D - ดาวน์โหลดเกมฟรี</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Audio Background Music -->
+    <audio id="bgMusic" loop autoplay>
+        <source src="bg_music.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Music Control Button -->
+    <button id="musicToggle" class="music-control">
+        <span id="musicIcon">🔊</span>
+    </button>
+
+    <!-- Particle Canvas -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- Background Overlay -->
+    <div class="background-overlay"></div>
+    
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-content">
+            <div class="tank-loader">🚜</div>
+            <h2 class="loading-text">กำลังโหลด TankGame 3D...</h2>
+            <div class="loading-bar">
+                <div class="loading-progress" id="loadingProgress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container" id="mainContent">
+        <!-- Header Section -->
+        <header class="header">
+            <div class="logo-section">
+                <h1 class="game-title" id="gameTitle">TANKGAME 3D</h1>
+                <p class="tagline">เกมรถถังสุดมันส์ที่คุณต้องลอง</p>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h2 class="hero-heading">พร้อมเข้าสู่สนามรบแล้วหรือยัง?</h2>
+                <p class="hero-description">
+                    เกมรถถัง 3 มิติแบบ 2 ผู้เล่นในเครื่องเดียว สู้กันแบบตัวต่อตัว!
+                </p>
+                
+                <!-- Download Button -->
+                <a href="https://files.manuscdn.com/user_upload_by_module/session_file/310519663192693794/UoCMfyiIlsstADvP.rar" class="download-btn" id="downloadBtn" target="_blank" download>
+                    <span class="btn-icon">⬇</span>
+                    <span class="btn-text">ดาวน์โหลดเกม</span>
+                </a>
+                
+                <p class="download-info">รองรับ Windows 10/11 | ขนาดไฟล์ ~500 MB</p>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features">
+            <h3 class="section-title">จุดเด่นของเกม</h3>
+            <div class="features-grid">
+                <div class="feature-card" data-aos="fade-up">
+                    <div class="feature-icon">🎮</div>
+                    <h4>เล่น 2 คนในเครื่องเดียว</h4>
+                    <p>โหมด Local Multiplayer สนุกกับเพื่อนบนจอเดียวกัน</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-icon">🚀</div>
+                    <h4>กราฟิก 3D สวยงาม</h4>
+                    <p>ภาพสามมิติคมชัดระดับ HD</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-icon">⚔️</div>
+                    <h4>สู้กันแบบตัวต่อตัว</h4>
+                    <p>ระบบการต่อสู้ที่ท้าทายและสมจริง</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <section class="team">
+            <h3 class="section-title">ทีมผู้พัฒนา</h3>
+            <div class="team-grid">
+                <div class="team-member" data-aos="zoom-in">
+                    <div class="member-avatar">👨‍💻</div>
+                    <h4 class="member-name">นายชัยณรงค์ ชัยสงค์</h4>
+                    <p class="member-id">6610070</p>
+                    <p class="member-role">Lead Developer</p>
+                </div>
+                <div class="team-member" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="member-avatar">👨‍💻</div>
+                    <h4 class="member-name">นายสุภากร บัวชัยชิต</h4>
+                    <p class="member-id">6610076</p>
+                    <p class="member-role">Game Designer</p>
+                </div>
+                <div class="team-member" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="member-avatar">👨‍💻</div>
+                    <h4 class="member-name">นายกิตติพงศ์ อุดมลาภ</h4>
+                    <p class="member-id">6610068</p>
+                    <p class="member-role">3D Artist</p>
+                </div>
+                <div class="team-member" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="member-avatar">👨‍💻</div>
+                    <h4 class="member-name">นายเฉลิมชัย คำแหงพล</h4>
+                    <p class="member-id">6610104</p>
+                    <p class="member-role">Sound Engineer</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2025 TankGame 3D Team. All rights reserved.</p>
+            <p class="footer-note">เกมนี้พัฒนาขึ้นเพื่อการศึกษา</p>
+        </footer>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="notification" class="notification">
+        <span id="notificationText"></span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
