@@ -2,6 +2,8 @@ import "dotenv/config";
 import express from "express";
 import { createServer } from "http";
 import net from "net";
+import fs from "fs";
+import path from "path";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
 import { registerOAuthRoutes } from "./oauth";
 import { appRouter } from "../routers";
@@ -38,13 +40,21 @@ async function startServer() {
   
   // Download endpoint for game file
   app.get('/api/download/game', (req, res) => {
-    const path = require('path');
     const filePath = path.join(process.cwd(), 'client', 'public', 'Build.rar');
-    res.download(filePath, 'TankGame_3D.rar', (err) => {
-      if (err) {
-        console.error('Download error:', err);
-        res.status(500).send('Download failed');
-      }
+    
+    if (!fs.existsSync(filePath)) {
+      console.error('File not found:', filePath);
+      return res.status(404).send('Game file not found');
+    }
+    
+    res.setHeader('Content-Type', 'application/x-rar-compressed');
+    res.setHeader('Content-Disposition', 'attachment; filename="TankGame_3D.rar"');
+    
+    const fileStream = fs.createReadStream(filePath);
+    fileStream.pipe(res);
+    fileStream.on('error', (err: any) => {
+      console.error('Stream error:', err);
+      res.status(500).send('Download failed');
     });
   });
   
